@@ -1,12 +1,13 @@
-import Ride from "../../elements/ride/Ride";
-import userData from "../../data/userData";
-import "./rides.css";
+import "./body.css";
+import Ride from "./Ride";
+import userData from "../data/userData";
+
 import { useState } from "react";
 import {closest, nearestArray} from "./Logic";
 
 
 
-function NearestRides() {
+function bodyNearest() {
  
   
  
@@ -34,4 +35,4 @@ function NearestRides() {
   )
 }
 
-export default NearestRides
+export default bodyNearest

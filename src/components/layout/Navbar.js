@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
 import "./Navbar.css";
+
+import { Link } from "react-router-dom";
 // import {pastRidesArray, upComingArray} from "../../pages/rides/Logic";
 import { useLocation } from "react-router-dom";
 

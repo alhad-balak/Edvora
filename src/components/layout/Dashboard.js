@@ -1,6 +1,6 @@
 import React from 'react'
 import './Dashboard.css'
-import userData from '../data/UserData'
+import userData from '../data/userData'
 
 function Dashboard() {
   return (

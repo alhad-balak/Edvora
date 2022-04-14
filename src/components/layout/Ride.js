@@ -1,6 +1,7 @@
 import React from "react";
-import LocationButton from "../location-button/LocationButton";
 import "./ride.css";
+
+import LocationButton from "../location-button/LocationButton";
 
 function Ride(props) {
     
@@ -17,7 +18,8 @@ function Ride(props) {
             <div>Distance: {props.distance}</div>
         </div>
         <div className="ride-location">
-            <div><LocationButton name={props.city}/></div><div><LocationButton name={props.state}/></div>
+            <div className="location-button">{props.city}</div>
+            <div className="location-button">{props.state}</div>
         </div>
     </div>
   )
