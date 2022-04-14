@@ -5,10 +5,10 @@ import { Router } from 'react-router-dom';
 
 function App() {
   return (
-    <Router>
+    <div>
       <Dashboard />
-      <Navbar />
-    </Router>
+      {/* <Navbar /> */}
+    </div>
   );
 }
 
