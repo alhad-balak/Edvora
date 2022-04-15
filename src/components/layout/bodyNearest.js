@@ -10,7 +10,6 @@ import { closest, nearestArray } from "../Logic";
 function BodyNearest(props) {
   return (
     <div className="rides" key="Nearest">
-
       {props.nearestArray.map((oneRide, index) => (
         <Ride
           key={oneRide.id}
@@ -21,14 +20,9 @@ function BodyNearest(props) {
           map_url={oneRide.map_url}
           state={oneRide.state}
           city={oneRide.city}
-          distance={Math.abs(props.closest(oneRide.station_path, 40) - props.userData.station_code)}
-        // oneRide.station_path.toString()
+          distance={Math.abs(props.closest(oneRide.station_path, props.stCode) - props.stCode)}
         />
       ))}
-
-      {/* {
-              ride_data.filter(isNearestRide)
-            } */}
     </div>
   )
 }

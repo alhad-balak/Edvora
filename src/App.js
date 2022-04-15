@@ -11,10 +11,11 @@ import PropTypes from 'prop-types'
 import axios from "axios";
 
 import React, { Component } from 'react'
+import Function from './components/Function';
 
 function App() {
 
-  const [filterState, setFilterState] = useState(false);
+
   const [nearestActive, setNearestActive] = useState(false);
   const [pastActive, setPastActive] = useState(false);
   const [upcomingActive, setUpcomingActive] = useState(false);
@@ -100,8 +101,8 @@ function App() {
 
 
   //Use {closest, nearestArray, pastRidesArray, upComingArray} wisely.
-  console.log(typeof closest);
-  console.log(nearestArray.length)
+  // console.log(typeof closest);
+  // console.log(nearestArray.length)
   // console.log(pastRidesArray);
   // console.log(upComingArray);
   // console.log(uData.station_code);
@@ -112,9 +113,10 @@ function App() {
         name={uData.name}
         image={uData.url}
       />
-      <Navbar filterState={filterState} setFilterState={setFilterState} userData={uData} pastRidesArray={pastRidesArray} closest={closest} upComingArray={upComingArray} nearestlength={nearestArray.length} />
-      <NavbarSort filterState={filterState} rideData={rData} userData={uData} pastRidesArray={pastRidesArray} closest={closest} upComingArray={upComingArray} />
-      <Switch>
+      <Function userData={uData} pastRidesArray={pastRidesArray} closest={closest} rideData={rData} upComingArray={upComingArray} nearestArray={nearestArray}/>
+      {/* <Navbar />
+      <NavbarSort filterState={filterState}  userData={uData} pastRidesArray={pastRidesArray} closest={closest} upComingArray={upComingArray} /> */}
+      {/* <Switch>
         <Route exact path="/" key="Nearest" >
           <BodyNearest key="/" userData={uData} closest={closest} nearestArray={nearestArray} />
         </Route>
@@ -124,7 +126,7 @@ function App() {
         <Route path="/past-rides" key="Past">
           <BodyPast key="/past" userData={uData} pastRidesArray={pastRidesArray} closest={closest} />
         </Route>
-      </Switch>
+      </Switch> */}
 
 
     </Router>
