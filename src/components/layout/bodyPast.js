@@ -1,10 +1,6 @@
 import Ride from "./Ride";
 import "./body.css";
 
-import userData from "../data/userData";
-import { closest } from "../Logic";
-import {pastRidesArray} from "../Logic";
-
 function BodyPast(props) {
     // console.log(Date.now());
     return (

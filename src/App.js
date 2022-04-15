@@ -63,7 +63,7 @@ function App() {
     }, Infinity) + num;
   }
 
-  // console.log(uData, rData);
+  console.log(uData, rData);
 
   return (
     <Router>

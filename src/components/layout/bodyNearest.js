@@ -1,10 +1,5 @@
 import "./body.css";
 import Ride from "./Ride";
-import userData from "../data/userData";
-
-import { useState } from "react";
-import { closest, nearestArray } from "../Logic";
-
 
 
 function BodyNearest(props) {

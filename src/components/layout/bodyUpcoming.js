@@ -1,9 +1,5 @@
 import "./body.css";
 import Ride from "./Ride";
-import userData from "../data/userData";
-
-import { upComingArray } from "../Logic";
-import { closest } from "../Logic";
 
 
 function BodyUpcoming(props) {
