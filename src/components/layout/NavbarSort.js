@@ -3,7 +3,7 @@ import rideData from "../data/RidesData";
 import "./NavbarSort.css";
 import { useState } from "react";
 // import PopupElement from "../popup-element/PopupElement";
-import {allCities, allStates} from "../Logic";
+import { allCities, allStates } from "../Logic";
 // import FilterDropDown from "../filterDropDown/FilterDropDown";
 
 
@@ -11,49 +11,54 @@ function NavbarSort(props) {
     const [stateDrop, setStateDrop] = useState(false);
     const [cityDrop, setCityDrop] = useState(false);
     const [stateList, setStateList] = useState(false);
-    
 
-    const handleStateDrop = () =>{
+
+    const handleStateDrop = () => {
         setStateDrop(!stateDrop)
-        if(stateDrop){
+        if (stateDrop) {
             setStateList(true)
-        }else{
+        } else {
             setStateList(false)
         }
     }
 
-    const handleCityDrop = () =>{
+    const handleCityDrop = () => {
         setCityDrop(!cityDrop)
     }
 
 
-  return (
-    <div className="filter-popup" style={props.filterState?{display:"block"}:{display:"none"}}>
-        <div className="title">
-            Filters
-        </div>
-        <div className="title-bar"/>
-        <hr />
-
-        <div className="state" onClick={handleStateDrop}>
-            State <i className={stateDrop?"fas fa-caret-up caret":"fas fa-caret-down caret"}></i>
-            <div className="dropdown-container">
-                {props.rideData.map(singleState=>{
-                    // <FilterDropDown stateName={singleState.state}/>
-                })}
+    return (
+        <div className="filter-popup" style={props.filterState ? { display: "block" } : { display: "none" }}>
+            <div className="title">
+                Filters
             </div>
-        </div>
+            <div className="title-bar" />
+            <li className="nav-item dropdown">
+                <a className=" state nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    State
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {props.rideData.map(singleState => {
+                        return <li><a className="dropdown-item" href="#">{singleState.state}</a></li>
+                    })}
+                </ul>
 
-        <div className="state" onClick={handleCityDrop}>
-            City  <i className={cityDrop?"fas fa-caret-up caret":"fas fa-caret-down caret"}></i>
-            <div className="dropdown-container">
-                {props.rideData.map(singleCity=>{ 
-                     return singleCity.city
-                })}
-            </div>
+                <a className=" city nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    City
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {props.rideData.map(singleCity => {
+                        return <li><a className="dropdown-item" href="#">{singleCity.city}</a></li>
+                    })}
+                </ul>
+            </li>
+            <li className="nav-item dropdown">
+
+            </li>
         </div>
-    </div>
-  )
+    )
 }
 
 export default NavbarSort
