@@ -5,7 +5,6 @@ import Navbar from './components/layout/Navbar';
 import BodyNearest from './components/layout/bodyNearest';
 import BodyUpcoming from './components/layout/bodyUpcoming';
 import BodyPast from './components/layout/bodyPast';
-import userData1 from './components/data/userData';
 import NavbarSort from './components/layout/NavbarSort';
 import { useState } from 'react';
 import PropTypes from 'prop-types'
@@ -36,7 +35,6 @@ function App() {
     url: Object.values(userData)[2]
 
   };
-
 
   React.useEffect(() => {
     axios.get("https://assessment.api.vweb.app/rides").then((response) => {
@@ -72,6 +70,40 @@ function App() {
   }
   // console.log(rData[0].destination_station_code);
 
+
+
+  //Building Logic Here.
+  const userLocation = uData.station_code;
+  const ride_data = rData;
+  const allStates = rData.map((singleRide) => singleRide.state);
+  const allCities = rData.map((singleRide) => singleRide.state);
+  const pastRidesArray = rData.filter(singleRide => singleRide.date < new Date());
+  const upComingArray = rData.filter(singleRide => singleRide.date > new Date());
+
+  const closest = (arr, num) => {
+    return arr.reduce((acc, val) => {
+      if (Math.abs(val - num) < Math.abs(acc)) {
+        return val - num;
+      } else {
+        return acc;
+      }
+    }, Infinity) + num;
+  }
+
+  const nearestArray = ride_data.sort((a, b) => {
+    if (closest(a.station_path, userLocation) > closest(b.station_path, userLocation)) {
+      return 1
+    } else {
+      return -1
+    }
+  })
+
+
+  //Use {closest, nearestArray, pastRidesArray, upComingArray} wisely.
+  console.log(nearestArray);
+  console.log(pastRidesArray);
+  console.log(upComingArray);
+
   return (
     <Router>
       <Dashborad
@@ -82,13 +114,13 @@ function App() {
       <NavbarSort filterState={filterState} />
       <Switch>
         <Route exact path="/" key="Nearest" >
-          <BodyNearest />
+          <BodyNearest userData={uData} closest={closest} nearestArray={nearestArray} />
         </Route>
         <Route exact path="/up" key="Upcoming">
-          <BodyUpcoming />
+          <BodyUpcoming userData={uData} closest={closest} upComingArray={upComingArray} />
         </Route>
         <Route exact path="/past-rides" key="Past">
-          <BodyPast />
+          <BodyPast userData={uData} pastRidesArray={pastRidesArray} closest={closest} />
         </Route>
       </Switch>
 

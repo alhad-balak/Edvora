@@ -1,15 +1,15 @@
 import Ride from "./Ride";
 import "./body.css";
-import userData from "../data/userData";
 
+import userData from "../data/userData";
 import { closest } from "../Logic";
 import {pastRidesArray} from "../Logic";
 
-function BodyPast() {
+function BodyPast(props) {
     console.log(Date.now());
     return (
       <div className="rides" key="Past">
-              {pastRidesArray.map((oneRide, index)=>(
+              {props.pastRidesArray.map((oneRide, index)=>(
               <Ride
               id={oneRide.id}
               os_code={oneRide.origin_station_code}
@@ -18,7 +18,7 @@ function BodyPast() {
               map_url={oneRide.map_url}
               state={oneRide.state}
               city={oneRide.city}
-              distance={Math.abs(closest(oneRide.station_path, 40)-userData.station_code)}
+              distance={Math.abs(props.closest(oneRide.station_path, 40)-props.userData.station_code)}
               />
               ))}        
       </div>

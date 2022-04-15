@@ -9,7 +9,7 @@ import { closest } from "../Logic";
 function BodyUpcoming(props) {
     return (
       <div className="rides" key="Upcoming">
-              {upComingArray.map((oneRide, index)=>(
+              {props.upComingArray.map((oneRide, index)=>(
               <Ride
               key={oneRide.id}
               id={oneRide.id}
@@ -19,7 +19,7 @@ function BodyUpcoming(props) {
               map_url={oneRide.map_url}
               state={oneRide.state}
               city={oneRide.city}
-              distance={Math.abs(closest(oneRide.station_path, 40)-userData.station_code)}
+              distance={Math.abs(props.closest(oneRide.station_path, 40)-props.userData.station_code)}
               />
               ))}        
       </div>

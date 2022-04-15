@@ -5,15 +5,14 @@ const userLocation = userData.station_code;
 const ride_data = rideData;
 
 
-const closest = (arr, num)=>{
+const closest = (arr, num) =>{
     return arr.reduce((acc,val)=>{
         if (Math.abs(val-num)< Math.abs(acc)){
             return val - num;
         }else{
             return acc;
         }
-    }, Infinity) + num;  
-    
+    }, Infinity) + num; 
 }
 
 const allStates = rideData.map((singleRide)=>singleRide.state);
@@ -25,9 +24,7 @@ const nearestArray = ride_data.sort((a,b)=>{
   }else{
       return -1
   }
- 
 })
-
 const pastRidesArray = rideData.filter(singleRide=> singleRide.date < new Date());
 const upComingArray = rideData.filter(singleRide=> singleRide.date > new Date());
 
