@@ -35,18 +35,18 @@ function Navbar(props) {
             <div className="filters-left">
               <Link to='/' className="filter-link" style={handleLinkStyle('/')} >
                 <div className="filters-item">
-                  Nearest rides
+                  Nearest rides {/*({props.nearestArray.length})*/}
                 </div>
               </Link>
               <Link to='/up' className="filter-link" style={handleLinkStyle('/up')}>
                 <div className="filters-item" >
-                  Upcoming rides ({upComingArray.length}) {/**/}
+                  Upcoming rides ({props.upComingArray.length}) 
                 </div>
                 
               </Link>
               <Link to='/past-rides' className="filter-link" style={handleLinkStyle('/past-rides')}>
                 <div className="filters-item">
-                  Past rides({pastRidesArray.length}) {/**/}
+                  Past rides({props.pastRidesArray.length}) {/**/}
                 </div>
               </Link>
             </div>

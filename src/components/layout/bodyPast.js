@@ -11,6 +11,7 @@ function BodyPast(props) {
       <div className="rides" key="Past">
               {props.pastRidesArray.map((oneRide, index)=>(
               <Ride
+              key={oneRide.id}
               id={oneRide.id}
               os_code={oneRide.origin_station_code}
               s_path={oneRide.station_path.toString()}

@@ -37,7 +37,7 @@ function NavbarSort(props) {
         <div className="state" onClick={handleStateDrop}>
             State <i className={stateDrop?"fas fa-caret-up caret":"fas fa-caret-down caret"}></i>
             <div className="dropdown-container">
-                {rideData.map(singleState=>{
+                {props.rideData.map(singleState=>{
                     // <FilterDropDown stateName={singleState.state}/>
                 })}
             </div>
@@ -47,7 +47,7 @@ function NavbarSort(props) {
             City  <i className={cityDrop?"fas fa-caret-up caret":"fas fa-caret-down caret"}></i>
             <div className="dropdown-container">
                 
-                {rideData.map(singleCity=>{ 
+                {props.rideData.map(singleCity=>{ 
                      return singleCity.city
                 })}
             </div>
