@@ -2,13 +2,13 @@ import "./body.css";
 import Ride from "./Ride";
 import userData from "../data/userData";
 
-import { upComingArray } from "./Logic";
-import { closest } from "./Logic";
+import { upComingArray } from "../Logic";
+import { closest } from "../Logic";
 
 
-function bodyUpcoming(props) {
+function BodyUpcoming(props) {
     return (
-      <div className="rides">
+      <div className="rides" key="Upcoming">
               {upComingArray.map((oneRide, index)=>(
               <Ride
               key={oneRide.id}
@@ -26,4 +26,4 @@ function bodyUpcoming(props) {
     )
 }
 
-export default bodyUpcoming
+export default BodyUpcoming

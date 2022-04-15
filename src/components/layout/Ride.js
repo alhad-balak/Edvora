@@ -1,7 +1,7 @@
 import React from "react";
-import "./ride.css";
+import "./Ride.css";
 
-import LocationButton from "../location-button/LocationButton";
+// import LocationButton from "../location-button/LocationButton";
 
 function Ride(props) {
     

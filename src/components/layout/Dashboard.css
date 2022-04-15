@@ -1,74 +1,51 @@
-.dashborad {
+.top-container{
     background-color: #101010;
     padding: 20px 43px;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 }
-
-.DashName {
-    position: absolute;
-    width: 114px;
-    height: 43px;
-    left: 43px;
-    top: 21px;
-
-    font-family: 'SF Pro Display';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 43px;
-    /* identical to box height */
-
-
-    color: #FFFFFF;
-
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    flex: 4;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 36px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-}
-
-.Profile {
+.top-profile{
     display: flex;
     float: right;
     color: #ffffff;
     justify-content: center;
     align-items: center;
 }
-
-.profileName {
+.top-title{
+    flex: 4;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 36px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+.top-profile-name{
     color: #ffffff;
     margin-right: 25px;
     font-size: 20px;
     font-weight: 700px;
     font-family: sans-serif;
-
+    
 }
-
-.profileImage {
+.top-profile-image{
     height: 44px;
     width: 44px;
     border-radius: 50%;
-    background-color: white; /*Temporary*/
-    
 }
 
 @media screen and (max-width: 800px) {
-    .profileName {
+    .top-profile-name{
         font-size: 15px;
         font-weight: 700;
+    }
+    .top-profile-name{
         margin-right: 5px;
     }
-
-    .profileImage {
+    .top-profile-image{
         right: 10px;
         margin-right: 0;
     }
-
-    .DashName {
+    .top-title{
         font-size: 30px;
     }
 }

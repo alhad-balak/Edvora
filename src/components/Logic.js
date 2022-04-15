@@ -1,4 +1,4 @@
-import rideData from "./data/RideData";
+import rideData from "./data/RidesData";
 import userData from "./data/userData";
 
 const userLocation = userData.station_code;

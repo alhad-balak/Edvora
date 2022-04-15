@@ -4,12 +4,12 @@ import userData from '../data/userData'
 
 function Dashboard() {
   return (
-    <div className="dashborad">
+    <div className="top-container">
 
-      <div className="DashName">Edvora</div>
-      <div className="Profile">
-        <div className="profileName">{userData.name}</div>
-        <div className="profileImage">
+      <div className="top-title">Edvora</div>
+      <div className="top-profile">
+        <div className="top-profile-name">{userData.name}</div>
+        <div className="top-profile-image">
           <img src={userData.image} alt="" className="top-profile-image" />
         </div>
       </div>

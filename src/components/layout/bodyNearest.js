@@ -3,16 +3,16 @@ import Ride from "./Ride";
 import userData from "../data/userData";
 
 import { useState } from "react";
-import {closest, nearestArray} from "./Logic";
+import {closest, nearestArray} from "../Logic";
 
 
 
-function bodyNearest() {
+function BodyNearest() {
  
   
  
   return (
-    <div className="rides" key="NearestRi">
+    <div className="rides" key="Nearest">
 
             {nearestArray.map((oneRide, index)=>(
             <Ride
@@ -35,4 +35,4 @@ function bodyNearest() {
   )
 }
 
-export default bodyNearest
+export default BodyNearest

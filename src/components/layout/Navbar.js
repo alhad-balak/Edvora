@@ -1,7 +1,7 @@
 import "./Navbar.css";
 
 import { Link } from "react-router-dom";
-// import {pastRidesArray, upComingArray} from "../../pages/rides/Logic";
+import {pastRidesArray, upComingArray} from "../Logic";
 import { useLocation } from "react-router-dom";
 
 function Navbar(props) {
@@ -40,12 +40,13 @@ function Navbar(props) {
               </Link>
               <Link to='/up' className="filter-link" style={handleLinkStyle('/up')}>
                 <div className="filters-item" >
-                  Upcoming rides {/*({upComingArray.length})*/}
+                  Upcoming rides ({upComingArray.length}) {/**/}
                 </div>
+                
               </Link>
               <Link to='/past-rides' className="filter-link" style={handleLinkStyle('/past-rides')}>
                 <div className="filters-item">
-                  Past rides {/*({pastRidesArray.length})*/}
+                  Past rides({pastRidesArray.length}) {/**/}
                 </div>
               </Link>
             </div>

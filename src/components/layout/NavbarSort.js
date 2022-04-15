@@ -1,9 +1,9 @@
 import rideData from "../data/RidesData";
 
-import "./filterPopUp.css";
+import "./NavbarSort.css";
 import { useState } from "react";
 // import PopupElement from "../popup-element/PopupElement";
-import {allCities, allStates} from "../../pages/rides/Logic";
+import {allCities, allStates} from "../Logic";
 // import FilterDropDown from "../filterDropDown/FilterDropDown";
 
 

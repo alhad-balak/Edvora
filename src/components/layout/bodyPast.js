@@ -2,13 +2,13 @@ import Ride from "./Ride";
 import "./body.css";
 import userData from "../data/userData";
 
-import { closest } from "./Logic";
-import {pastRidesArray} from "./Logic";
+import { closest } from "../Logic";
+import {pastRidesArray} from "../Logic";
 
-function bodyPast() {
+function BodyPast() {
     console.log(Date.now());
     return (
-      <div className="rides" key="PastRi">
+      <div className="rides" key="Past">
               {pastRidesArray.map((oneRide, index)=>(
               <Ride
               id={oneRide.id}
@@ -25,4 +25,4 @@ function bodyPast() {
     )
 }
 
-export default bodyPast
+export default BodyPast
