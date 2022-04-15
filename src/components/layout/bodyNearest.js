@@ -13,7 +13,7 @@ function BodyNearest(props) {
 
       {props.nearestArray.map((oneRide, index) => (
         <Ride
-          key={oneRide.id + 1}
+          key={oneRide.id}
           id={oneRide.id}
           os_code={oneRide.origin_station_code}
           s_path={oneRide.station_path.toString()}

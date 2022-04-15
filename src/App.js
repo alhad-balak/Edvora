@@ -80,7 +80,7 @@ function App() {
   const pastRidesArray = rData.filter(singleRide => singleRide.date < new Date());
   const upComingArray = rData.filter(singleRide => singleRide.date > new Date());
 
-  function closest(arr, num) {
+  const closest = (arr, num) => {
     return arr.reduce((acc, val) => {
       if (Math.abs(val - num) < Math.abs(acc)) {
         return val - num;
@@ -100,35 +100,35 @@ function App() {
 
 
   //Use {closest, nearestArray, pastRidesArray, upComingArray} wisely.
-  // console.log(closest);
+  console.log(typeof closest);
   console.log(nearestArray.length)
-// console.log(pastRidesArray);
-// console.log(upComingArray);
-// console.log(uData.station_code);
+  // console.log(pastRidesArray);
+  // console.log(upComingArray);
+  // console.log(uData.station_code);
 
-return (
-  <Router>
-    <Dashborad
-      name={uData.name}
-      image={uData.url}
-    />
-    <Navbar filterState={filterState} setFilterState={setFilterState} userData={uData} pastRidesArray={pastRidesArray} closest={closest} upComingArray={upComingArray} />
-    <NavbarSort filterState={filterState} rideData={rData} userData={uData} pastRidesArray={pastRidesArray} closest={closest} upComingArray={upComingArray} />
-    <Switch>
-      <Route exact path="/" key="Nearest" >
-        <BodyNearest key="/" userData={uData} closest={closest} nearestArray={nearestArray} />
-      </Route>
-      <Route exact path="/up" key="Upcoming">
-        <BodyUpcoming key="/upcoming" userData={uData} closest={closest} upComingArray={upComingArray} />
-      </Route>
-      <Route exact path="/past-rides" key="Past">
-        <BodyPast key="/past" userData={uData} pastRidesArray={pastRidesArray} closest={closest} />
-      </Route>
-    </Switch>
+  return (
+    <Router>
+      <Dashborad
+        name={uData.name}
+        image={uData.url}
+      />
+      <Navbar filterState={filterState} setFilterState={setFilterState} userData={uData} pastRidesArray={pastRidesArray} closest={closest} upComingArray={upComingArray} nearestlength={nearestArray.length} />
+      <NavbarSort filterState={filterState} rideData={rData} userData={uData} pastRidesArray={pastRidesArray} closest={closest} upComingArray={upComingArray} />
+      <Switch>
+        <Route exact path="/" key="Nearest" >
+          <BodyNearest key="/" userData={uData} closest={closest} nearestArray={nearestArray} />
+        </Route>
+        <Route path="/up" key="Upcoming">
+          <BodyUpcoming key="/upcoming" userData={uData} closest={closest} upComingArray={upComingArray} />
+        </Route>
+        <Route path="/past-rides" key="Past">
+          <BodyPast key="/past" userData={uData} pastRidesArray={pastRidesArray} closest={closest} />
+        </Route>
+      </Switch>
 
 
-  </Router>
-);
+    </Router>
+  );
 }
 
 export default App;

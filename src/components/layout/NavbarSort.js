@@ -32,6 +32,7 @@ function NavbarSort(props) {
         <div className="title">
             Filters
         </div>
+        <div className="title-bar"/>
         <hr />
 
         <div className="state" onClick={handleStateDrop}>
@@ -46,7 +47,6 @@ function NavbarSort(props) {
         <div className="state" onClick={handleCityDrop}>
             City  <i className={cityDrop?"fas fa-caret-up caret":"fas fa-caret-down caret"}></i>
             <div className="dropdown-container">
-                
                 {props.rideData.map(singleCity=>{ 
                      return singleCity.city
                 })}

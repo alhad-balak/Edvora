@@ -35,7 +35,7 @@ function Navbar(props) {
             <div className="filters-left">
               <Link to='/' className="filter-link" style={handleLinkStyle('/')} >
                 <div className="filters-item">
-                  Nearest rides {/*({props.nearestArray.length})*/}
+                  Nearest rides ({props.nearestlength}){/*({props.nearestArray.length})*/}
                 </div>
               </Link>
               <Link to='/up' className="filter-link" style={handleLinkStyle('/up')}>
