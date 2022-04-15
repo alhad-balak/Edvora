@@ -1,26 +1,11 @@
 import './App.css';
 import Dashborad from './components/layout/Dashboard';
 import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
-import BodyNearest from './components/layout/bodyNearest';
-import BodyUpcoming from './components/layout/bodyUpcoming';
-import BodyPast from './components/layout/bodyPast';
-import NavbarSort from './components/layout/NavbarSort';
-import { useState } from 'react';
-import PropTypes from 'prop-types'
 import axios from "axios";
-
-import React, { Component } from 'react'
+import React from 'react'
 import Function from './components/Function';
 
 function App() {
-
-
-  const [nearestActive, setNearestActive] = useState(false);
-  const [pastActive, setPastActive] = useState(false);
-  const [upcomingActive, setUpcomingActive] = useState(false);
-
-
   const [userData, setUserData] = React.useState({});
   const [ridesData, setRidesData] = React.useState({})
 
@@ -34,7 +19,6 @@ function App() {
     station_code: Object.values(userData)[0],
     name: Object.values(userData)[1],
     url: Object.values(userData)[2]
-
   };
 
   React.useEffect(() => {
@@ -44,8 +28,6 @@ function App() {
   }, []);
   // console.log(Object.values(ridesData)[0]);
   var rData = [];
-  // a=(ridesData);
-  // console.log((a[0].id));
   var rObj = {
     id: 966,
     origin_station_code: 4,
@@ -71,16 +53,6 @@ function App() {
   }
   // console.log(rData[0].destination_station_code);
 
-
-
-  //Building Logic Here.
-  const userLocation = uData.station_code;
-  const ride_data = rData;
-  const allStates = rData.map((singleRide) => singleRide.state);
-  const allCities = rData.map((singleRide) => singleRide.state);
-  const pastRidesArray = rData.filter(singleRide => singleRide.date < new Date());
-  const upComingArray = rData.filter(singleRide => singleRide.date > new Date());
-
   const closest = (arr, num) => {
     return arr.reduce((acc, val) => {
       if (Math.abs(val - num) < Math.abs(acc)) {
@@ -91,21 +63,7 @@ function App() {
     }, Infinity) + num;
   }
 
-  const nearestArray = ride_data.sort((a, b) => {
-    if (closest(a.station_path, userLocation) > closest(b.station_path, userLocation)) {
-      return 1
-    } else {
-      return -1
-    }
-  })
-
-
-  //Use {closest, nearestArray, pastRidesArray, upComingArray} wisely.
-  // console.log(typeof closest);
-  // console.log(nearestArray.length)
-  // console.log(pastRidesArray);
-  // console.log(upComingArray);
-  // console.log(uData.station_code);
+  // console.log(uData, rData);
 
   return (
     <Router>
@@ -113,22 +71,7 @@ function App() {
         name={uData.name}
         image={uData.url}
       />
-      <Function userData={uData} pastRidesArray={pastRidesArray} closest={closest} rideData={rData} upComingArray={upComingArray} nearestArray={nearestArray}/>
-      {/* <Navbar />
-      <NavbarSort filterState={filterState}  userData={uData} pastRidesArray={pastRidesArray} closest={closest} upComingArray={upComingArray} /> */}
-      {/* <Switch>
-        <Route exact path="/" key="Nearest" >
-          <BodyNearest key="/" userData={uData} closest={closest} nearestArray={nearestArray} />
-        </Route>
-        <Route path="/up" key="Upcoming">
-          <BodyUpcoming key="/upcoming" userData={uData} closest={closest} upComingArray={upComingArray} />
-        </Route>
-        <Route path="/past-rides" key="Past">
-          <BodyPast key="/past" userData={uData} pastRidesArray={pastRidesArray} closest={closest} />
-        </Route>
-      </Switch> */}
-
-
+      <Function userData={uData} closest={closest} rideData={rData} />
     </Router>
   );
 }

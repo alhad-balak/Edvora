@@ -2,19 +2,9 @@ import "./Function.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
-
-// import rideData from "../data/RidesData";
-import { pastRidesArray, upComingArray } from "./Logic";
-// import "./NavbarSort.css";
-// import PopupElement from "../popup-element/PopupElement";
-import { allCities, allStates } from "./Logic";
-import BodyNearest from "./layout/bodyNearest";
-import BodyUpcoming from "./layout/bodyUpcoming";
-import BodyPast from "./layout/bodyPast";
-import userData from "./data/userData";
-// import FilterDropDown from "../filterDropDown/FilterDropDown";
-
+import BodyNearest from "./layout/bodyNearest"
+import BodyPast from "./layout/bodyPast"
+import BodyUpcoming from "./layout/bodyUpcoming"
 
 function Function(props) {
     const currentLocation = useLocation().pathname;
@@ -40,9 +30,7 @@ function Function(props) {
     const [nearest, setNeareast] = useState([]);
     const [upcoming, setUpcoming] = useState([]);
     const [past, setPast] = useState([]);
-    // var nearest=[];
-    // var nearest=[];
-    // var nearest=[];
+
     var temp = [];
     var stCode = props.userData.station_code;
     var uData = props.userData;
@@ -116,24 +104,6 @@ function Function(props) {
         console.log(past);
     }
 
-    // const [stateDrop, setStateDrop] = useState(false);
-    // const [cityDrop, setCityDrop] = useState(false);
-    // const [stateList, setStateList] = useState(false);
-
-
-    // const handleStateDrop = () => {
-    //     setStateDrop(!stateDrop)
-    //     if (stateDrop) {
-    //         setStateList(true)
-    //     } else {
-    //         setStateList(false)
-    //     }
-    // }
-
-    // const handleCityDrop = () => {
-    //     setCityDrop(!cityDrop)
-    // }
-
     const linkStyle = {
         textDecoration: "none",
         color: "#fff"
@@ -202,12 +172,12 @@ function Function(props) {
                         </Link>
                         <Link to='/upcoming-rides' className="filter-link" style={handleLinkStyle('/up')}>
                             <div className="filters-item" onClick={handleUpcoming}>
-                                Upcoming rides ({props.upComingArray.length})
+                                Upcoming rides ({upcoming.length})
                             </div>
                         </Link>
                         <Link to='/past-rides' className="filter-link" style={handleLinkStyle('/past-rides')}>
                             <div className="filters-item" onClick={handlePast}>
-                                Past rides({props.pastRidesArray.length}) {/**/}
+                                Past rides({past.length})
                             </div>
                         </Link>
                     </div>
