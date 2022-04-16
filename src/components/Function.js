@@ -1,10 +1,16 @@
 import "./Function.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import BodyNearest from "./layout/bodyNearest"
 import BodyPast from "./layout/bodyPast"
 import BodyUpcoming from "./layout/bodyUpcoming"
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 function Function(props) {
     const currentLocation = useLocation().pathname;
@@ -27,7 +33,7 @@ function Function(props) {
 
     const [selectedState, setSelectedState] = useState("State");
     const [selectedCity, setSelectedCity] = useState("City");
-    const [nearest, setNeareast] = useState([]);
+    const [nearest, setNearest] = useState([]);
     const [upcoming, setUpcoming] = useState([]);
     const [past, setPast] = useState([]);
 
@@ -35,74 +41,91 @@ function Function(props) {
     var stCode = props.userData.station_code;
     var uData = props.userData;
     var rData = props.rideData;
+
     const arrange = (city, state) => {
-        for (var i = 0; i < uData; i++) {
+        console.log(city, state);
+        for (var i = 0; i < rData; i++) {
             if (city === "City" && state === "State") {
                 temp = [];
+                console.log(temp);
                 temp = nearest;
+                console.log(temp);
                 temp.push(uData[i]);
-                nearest.push(temp);
+                console.log(temp);
+                setNearest((ele)=>ele,
+                {
+                    id: uData[i].id,
+                    origin_station_code: uData[i].origin_station_code,
+                    station_path: uData[i].station_path,
+                    date: uData[i].date,
+                    map_url: uData[i].map_url,
+                    state: uData[i].state,
+                    
+                });
+                console.log("\n\n")
                 if (uData[i].date < new Date()) {
                     temp = upcoming;
                     temp.push(uData[i]);
-                    upcoming.push(temp);
+                    setUpcoming(temp);
                 }
                 if (uData[i].date > new Date()) {
                     temp = past;
                     temp.push(uData[i]);
-                    past.push(temp);
+                    setPast(temp);
                 }
             } else if (city === "City" && state === uData[i].state) {
                 temp = nearest;
                 temp.push(uData[i]);
-                nearest.push(temp);
+                setNearest(temp);
                 if (uData[i].date < new Date()) {
                     temp = upcoming;
                     temp.push(uData[i]);
-                    upcoming.push(temp);
+                    setUpcoming(temp);
                 }
                 if (uData[i].date > new Date()) {
                     temp = past;
                     temp.push(uData[i]);
-                    past.push(temp);
+                    setPast(temp);
                 }
 
             }
             else if (city === uData[i].city && state === "State") {
                 temp = nearest;
                 temp.push(uData[i]);
-                nearest.push(temp);
+                setNearest(temp);
                 if (uData[i].date < new Date()) {
                     temp = upcoming;
                     temp.push(uData[i]);
-                    upcoming.push(temp);
+                    setUpcoming(temp);
                 }
                 if (uData[i].date > new Date()) {
                     temp = past;
                     temp.push(uData[i]);
-                    past.push(temp);
+                    setPast(temp);
                 }
             }
             else if (city === uData[i].city && state === uData[i].state) {
                 temp = nearest;
                 temp.push(uData[i]);
-                nearest.push(temp);
+                setNearest(temp);
                 if (uData[i].date < new Date()) {
                     temp = upcoming;
                     temp.push(uData[i]);
-                    upcoming.push(temp);
+                    setUpcoming(temp);
                 }
                 if (uData[i].date > new Date()) {
                     temp = past;
                     temp.push(uData[i]);
-                    past.push(temp);
+                    setPast(temp);
                 }
             }
         }
+        console.log(city, state);
         console.log(nearest);
         console.log(upcoming);
         console.log(past);
     }
+    arrange("City", "State");
 
     const linkStyle = {
         textDecoration: "none",
@@ -123,29 +146,29 @@ function Function(props) {
     }
     const handleNearest = () => {
         console.log("Nearest Ride is CLicked");
-        setNeareast([]);
-        setPast([]);
-        setUpcoming([]);
-        arrange(selectedCity, selectedState);
+        // setNeareast([]);
+        // setPast([]);
+        // setUpcoming([]);
+        // arrange(selectedCity, selectedState);
     }
     const handleUpcoming = () => {
         console.log("Upcoming Ride is Clicked");
-        setNeareast([]);
-        setPast([]);
-        setUpcoming([]);
-        arrange(selectedCity, selectedState);
+        // setNeareast([]);
+        // setPast([]);
+        // setUpcoming([]);
+        // arrange(selectedCity, selectedState);
     }
     const handlePast = () => {
         console.log("Past ride is clicked");
-        setNeareast([]);
-        setPast([]);
-        setUpcoming([]);
-        arrange(selectedCity, selectedState);
+        // setNeareast([]);
+        // setPast([]);
+        // setUpcoming([]);
+        // arrange(selectedCity, selectedState);
     }
     const handleState = (e) => {
         console.log("Selected state is " + e.target.value)
         setSelectedState(e.target.value);
-        setNeareast([]);
+        setNearest([]);
         setPast([]);
         setUpcoming([]);
         arrange(selectedCity, selectedState);
@@ -154,15 +177,16 @@ function Function(props) {
     const handleCity = (e) => {
         console.log("Selected city is " + e.target.value)
         setSelectedCity(e.target.value);
-        setNeareast([]);
+        setNearest([]);
         setPast([]);
         setUpcoming([]);
+
         arrange(selectedCity, selectedState);
         handleFilter();
     }
     return (
         <>
-            <div className="filters-navbar">
+            <div className="filters-navbar" >
                 <div className="filters-container">
                     <div className="filters-left">
                         <Link to='/' className="filter-link" style={handleLinkStyle('/')} >
@@ -186,7 +210,7 @@ function Function(props) {
                         <div className="filters-item right" ><i className="fas fa-filter"></i> Filter</div>
                     </div>
                 </div>
-            </div>
+            </div >
             <div className="filter-popup" style={filterState ? { display: "block" } : { display: "none" }}>
                 <div className="title">
                     Filters
@@ -198,8 +222,8 @@ function Function(props) {
                         {selectedState}
                     </a>
                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {props.rideData.map(singleState => {
-                            return <li><option className="dropdown-item" onClick={handleState}>{singleState.state}</option></li>
+                        {props.rideData.map((singleState, ind) => {
+                            return <li key={ind}><option className="dropdown-item" onClick={handleState}>{singleState.state}</option></li>
                         })}
                     </ul>
 
@@ -208,17 +232,27 @@ function Function(props) {
                         {selectedCity}
                     </a>
                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {props.rideData.map(singleCity => {
-                            return <li><option className="dropdown-item" onClick={handleCity}> {singleCity.city}</option></li>
+                        {props.rideData.map((singleCity, index) => {
+                            return <li key={index}><option className="dropdown-item" onClick={handleCity}> {singleCity.city}</option></li>
                         })}
                     </ul>
                 </li>
                 <li className="nav-item dropdown">
                 </li>
             </div >
-            <BodyNearest key="/" closest={closest} stCode={stCode} nearestArray={nearest} />
-            <BodyUpcoming key="/upcoming" closest={closest} stCode={stCode} upComingArray={upcoming} />
-            <BodyPast key="/past" closest={closest} stCode={stCode} pastRidesArray={past} />
+            <Router>
+                <Switch>
+                    <Route exact path="/">
+                        <BodyNearest key="/nearest" closest={closest} stCode={stCode} nearestArray={rData.slice(0, 10)} />
+                    </Route>
+                    <Route exact path="/upcoming-rides">
+                        <BodyUpcoming key="/upcoming" closest={closest} stCode={stCode} upComingArray={rData.slice(11, 19)} />
+                    </Route>
+                    <Route exact path="/past-rides">
+                        <BodyPast key="/past" closest={closest} stCode={stCode} pastRidesArray={rData.slice(34, 37)} />
+                    </Route>
+                </Switch>
+            </Router>
         </>
     )
 }

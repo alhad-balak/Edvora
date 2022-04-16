@@ -2,12 +2,11 @@ import Ride from "./Ride";
 import "./body.css";
 
 function BodyPast(props) {
-    // console.log(Date.now());
     return (
       <div className="rides" key="Past">
               {props.pastRidesArray.map((oneRide, index)=>(
               <Ride
-              key={oneRide.id}
+              key={index}
               id={oneRide.id}
               os_code={oneRide.origin_station_code}
               s_path={oneRide.station_path.toString()}

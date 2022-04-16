@@ -7,7 +7,7 @@ function BodyUpcoming(props) {
     <div className="rides" key="Upcoming">
       {props.upComingArray.map((oneRide, index) => (
         <Ride
-          key={oneRide.id}
+          key={index}
           id={oneRide.id}
           os_code={oneRide.origin_station_code}
           s_path={oneRide.station_path.toString()}

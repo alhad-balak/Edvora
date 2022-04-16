@@ -52,6 +52,7 @@ function App() {
     rData.push(rObj);
   }
   // console.log(rData[0].destination_station_code);
+  // console.log(uData.station_code);
 
   const closest = (arr, num) => {
     return arr.reduce((acc, val) => {
@@ -63,7 +64,7 @@ function App() {
     }, Infinity) + num;
   }
 
-  console.log(uData, rData);
+  // console.log(uData, rData);
 
   return (
     <Router>
@@ -71,7 +72,7 @@ function App() {
         name={uData.name}
         image={uData.url}
       />
-      <Function userData={uData} closest={closest} rideData={rData} />
+      <Function key="/function" userData={uData} closest={closest} rideData={rData} />
     </Router>
   );
 }

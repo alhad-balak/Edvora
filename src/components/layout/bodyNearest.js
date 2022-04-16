@@ -1,13 +1,31 @@
 import "./body.css";
 import Ride from "./Ride";
 
-
+const closest = (arr, num) => {
+  return arr.reduce((acc, val) => {
+    if (Math.abs(val - num) < Math.abs(acc)) {
+      return val - num;
+    } else {
+      return acc;
+    }
+  }, Infinity) + num;
+}
 function BodyNearest(props) {
+  // console.log(props.nearestArray);
+  const Array = props.nearestArray.sort((a, b) => {
+    if (Math.abs(closest(a.station_path, props.stCode)) > Math.abs(closest(b.station_path, props.stCode))) {
+      return 1
+    } else {
+      return -1;
+    }
+    return 0;
+  })
+  console.log(Array);
   return (
     <div className="rides" key="Nearest">
-      {props.nearestArray.map((oneRide, index) => (
+      {Array.map((oneRide, index) => (
         <Ride
-          key={oneRide.id}
+          key={index}
           id={oneRide.id}
           os_code={oneRide.origin_station_code}
           s_path={oneRide.station_path.toString()}
