@@ -39,7 +39,7 @@ function Function(props) {
 
     var temp = [];
     var stCode = props.userData.station_code;
-    var uData = props.userData;
+    var rData = props.userData;
     var rData = props.rideData;
 
     const arrange = (city, state) => {
@@ -47,85 +47,86 @@ function Function(props) {
         for (var i = 0; i < rData; i++) {
             if (city === "City" && state === "State") {
                 temp = [];
-                console.log(temp);
+                // console.log(temp);
                 temp = nearest;
-                console.log(temp);
-                temp.push(uData[i]);
-                console.log(temp);
-                setNearest((ele)=>ele,
-                {
-                    id: uData[i].id,
-                    origin_station_code: uData[i].origin_station_code,
-                    station_path: uData[i].station_path,
-                    date: uData[i].date,
-                    map_url: uData[i].map_url,
-                    state: uData[i].state,
-                    
-                });
+                // console.log(temp);
+                temp.push(rData[i]);
+
+                // console.log(temp);
+                setNearest((ele) => ele,
+                    {
+                        id: rData[i].id,
+                        origin_station_code: rData[i].origin_station_code,
+                        station_path: rData[i].station_path,
+                        date: rData[i].date,
+                        map_url: rData[i].map_url,
+                        state: rData[i].state,
+
+                    });
                 console.log("\n\n")
-                if (uData[i].date < new Date()) {
+                if (rData[i].date < new Date()) {
                     temp = upcoming;
-                    temp.push(uData[i]);
+                    temp.push(rData[i]);
                     setUpcoming(temp);
                 }
-                if (uData[i].date > new Date()) {
+                if (rData[i].date > new Date()) {
                     temp = past;
-                    temp.push(uData[i]);
+                    temp.push(rData[i]);
                     setPast(temp);
                 }
-            } else if (city === "City" && state === uData[i].state) {
+            } else if (city === "City" && state === rData[i].state) {
                 temp = nearest;
-                temp.push(uData[i]);
+                temp.push(rData[i]);
                 setNearest(temp);
-                if (uData[i].date < new Date()) {
+                if (rData[i].date < new Date()) {
                     temp = upcoming;
-                    temp.push(uData[i]);
+                    temp.push(rData[i]);
                     setUpcoming(temp);
                 }
-                if (uData[i].date > new Date()) {
+                if (rData[i].date > new Date()) {
                     temp = past;
-                    temp.push(uData[i]);
+                    temp.push(rData[i]);
                     setPast(temp);
                 }
 
             }
-            else if (city === uData[i].city && state === "State") {
+            else if (city === rData[i].city && state === "State") {
                 temp = nearest;
-                temp.push(uData[i]);
+                temp.push(rData[i]);
                 setNearest(temp);
-                if (uData[i].date < new Date()) {
+                if (rData[i].date < new Date()) {
                     temp = upcoming;
-                    temp.push(uData[i]);
+                    temp.push(rData[i]);
                     setUpcoming(temp);
                 }
-                if (uData[i].date > new Date()) {
+                if (rData[i].date > new Date()) {
                     temp = past;
-                    temp.push(uData[i]);
+                    temp.push(rData[i]);
                     setPast(temp);
                 }
             }
-            else if (city === uData[i].city && state === uData[i].state) {
+            else if (city === rData[i].city && state === rData[i].state) {
                 temp = nearest;
-                temp.push(uData[i]);
+                temp.push(rData[i]);
                 setNearest(temp);
-                if (uData[i].date < new Date()) {
+                if (rData[i].date < new Date()) {
                     temp = upcoming;
-                    temp.push(uData[i]);
+                    temp.push(rData[i]);
                     setUpcoming(temp);
                 }
-                if (uData[i].date > new Date()) {
+                if (rData[i].date > new Date()) {
                     temp = past;
-                    temp.push(uData[i]);
+                    temp.push(rData[i]);
                     setPast(temp);
                 }
             }
         }
-        console.log(city, state);
-        console.log(nearest);
-        console.log(upcoming);
-        console.log(past);
+    //     console.log(city, state);
+    //     console.log(nearest);
+    //     console.log(upcoming);
+    //     console.log(past);
     }
-    arrange("City", "State");
+    // arrange("City", "State");
 
     const linkStyle = {
         textDecoration: "none",
@@ -146,40 +147,28 @@ function Function(props) {
     }
     const handleNearest = () => {
         console.log("Nearest Ride is CLicked");
-        // setNeareast([]);
-        // setPast([]);
-        // setUpcoming([]);
-        // arrange(selectedCity, selectedState);
     }
     const handleUpcoming = () => {
         console.log("Upcoming Ride is Clicked");
-        // setNeareast([]);
-        // setPast([]);
-        // setUpcoming([]);
-        // arrange(selectedCity, selectedState);
     }
     const handlePast = () => {
         console.log("Past ride is clicked");
-        // setNeareast([]);
-        // setPast([]);
-        // setUpcoming([]);
-        // arrange(selectedCity, selectedState);
     }
     const handleState = (e) => {
         console.log("Selected state is " + e.target.value)
         setSelectedState(e.target.value);
-        setNearest([]);
-        setPast([]);
-        setUpcoming([]);
+        // setNearest([]);
+        // setPast([]);
+        // setUpcoming([]);
         arrange(selectedCity, selectedState);
         handleFilter();
     }
     const handleCity = (e) => {
         console.log("Selected city is " + e.target.value)
         setSelectedCity(e.target.value);
-        setNearest([]);
-        setPast([]);
-        setUpcoming([]);
+        // setNearest([]);
+        // setPast([]);
+        // setUpcoming([]);
 
         arrange(selectedCity, selectedState);
         handleFilter();
