@@ -3,7 +3,7 @@ import "./body.css";
 
 function BodyPast(props) {
     return (
-      <div className="rides" key="Past">
+      <div className="rides">
               {props.pastRidesArray.map((oneRide, index)=>(
               <Ride
               key={index}

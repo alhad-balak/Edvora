@@ -21,7 +21,7 @@ function BodyNearest(props) {
   })
   // console.log(Array);
   return (
-    <div className="rides" key="Nearest">
+    <div className="rides">
       {Array.map((oneRide, index) => (
         <Ride
           key={index}

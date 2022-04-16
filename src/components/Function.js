@@ -1,5 +1,5 @@
 import "./Function.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import BodyNearest from "./layout/bodyNearest"
@@ -33,100 +33,83 @@ function Function(props) {
 
     const [selectedState, setSelectedState] = useState("State");
     const [selectedCity, setSelectedCity] = useState("City");
-    const [nearest, setNearest] = useState([]);
-    const [upcoming, setUpcoming] = useState([]);
-    const [past, setPast] = useState([]);
-
+    const [nearest, setNearest] = useState(null);
+    const [upcoming, setUpcoming] = useState(null);
+    const [past, setPast] = useState(null);
+    var nearest1 = [];
+    var past1 = [];
+    var upcoming1 = [];
+    var allArr;
     var temp = [];
     var stCode = props.userData.station_code;
     var rData = props.userData;
     var rData = props.rideData;
-
-    const arrange = (city, state) => {
-        console.log(city, state);
-        for (var i = 0; i < rData; i++) {
-            if (city === "City" && state === "State") {
-                temp = [];
-                // console.log(temp);
-                temp = nearest;
-                // console.log(temp);
-                temp.push(rData[i]);
-
-                // console.log(temp);
-                setNearest((ele) => ele,
-                    {
-                        id: rData[i].id,
-                        origin_station_code: rData[i].origin_station_code,
-                        station_path: rData[i].station_path,
-                        date: rData[i].date,
-                        map_url: rData[i].map_url,
-                        state: rData[i].state,
-
-                    });
-                console.log("\n\n")
-                if (rData[i].date < new Date()) {
-                    temp = upcoming;
-                    temp.push(rData[i]);
-                    setUpcoming(temp);
-                }
-                if (rData[i].date > new Date()) {
-                    temp = past;
-                    temp.push(rData[i]);
-                    setPast(temp);
-                }
-            } else if (city === "City" && state === rData[i].state) {
-                temp = nearest;
-                temp.push(rData[i]);
-                setNearest(temp);
-                if (rData[i].date < new Date()) {
-                    temp = upcoming;
-                    temp.push(rData[i]);
-                    setUpcoming(temp);
-                }
-                if (rData[i].date > new Date()) {
-                    temp = past;
-                    temp.push(rData[i]);
-                    setPast(temp);
-                }
-
-            }
-            else if (city === rData[i].city && state === "State") {
-                temp = nearest;
-                temp.push(rData[i]);
-                setNearest(temp);
-                if (rData[i].date < new Date()) {
-                    temp = upcoming;
-                    temp.push(rData[i]);
-                    setUpcoming(temp);
-                }
-                if (rData[i].date > new Date()) {
-                    temp = past;
-                    temp.push(rData[i]);
-                    setPast(temp);
-                }
-            }
-            else if (city === rData[i].city && state === rData[i].state) {
-                temp = nearest;
-                temp.push(rData[i]);
-                setNearest(temp);
-                if (rData[i].date < new Date()) {
-                    temp = upcoming;
-                    temp.push(rData[i]);
-                    setUpcoming(temp);
-                }
-                if (rData[i].date > new Date()) {
-                    temp = past;
-                    temp.push(rData[i]);
-                    setPast(temp);
-                }
-            }
+    const fil = () => {
+        if (selectedState === "State" && selectedCity !== "City") {
+            var allArr = rData.filter((item) => {
+                return item.city === selectedCity
+            });
+            var upArr = allArr.filter((item) => {
+                return (item.date - new Date()) > 0;
+            });
+            var pastArr = allArr.filter((item) => {
+                return (item.date) - new Date() < 0;
+            });
+            past1 = pastArr;
+            upcoming1 = upArr;
+            // setPast(pastArr);
+            // setUpcoming(upArr);
+            // console.log(Date);
+            console.log(rData, past1, upcoming1);
         }
-    //     console.log(city, state);
-    //     console.log(nearest);
-    //     console.log(upcoming);
-    //     console.log(past);
+        else if (selectedState !== "State" && selectedCity === "City") {
+            var allArr1 = rData.filter((item) => {
+                return item.state === selectedCity
+            });
+            var upArr1 = allArr1.filter((item) => {
+                return new Date(item.date) - new Date() > 0;
+            });
+            var pastArr1 = allArr1.filter((item) => {
+                return new Date(item.date) - new Date() < 0;
+            });
+            // setPast(pastArr1);
+            // setUpcoming(upArr1);
+            // console.log(pastArr1, upArr1);
+        }
+        else if (selectedState != "State" && selectedCity != "City") {
+            var allArr2 = rData
+            allArr2.filter((item) => {
+                return item.city === selectedCity
+            });
+            allArr2.filter((item) => {
+                return item.state === selectedState
+            })
+            var upArr2 = allArr2
+            upArr2.filter((item) => {
+                return (new Date(item.date) - new Date() > 0);
+            });
+            var pastArr2 = allArr2
+            pastArr2.filter((item) => {
+                return (new Date(item.date) - new Date() < 0);
+            });
+            // console.log(allArr2, upArr2, pastArr2)
+            // useEffect((prev)=)
+            // setPast(allArr2);
+            // setUpcoming(upArr2);
+            // console.log(past, upcoming);
+        }
+        else {
+            var upArr3 = rData.filter((item) => {
+                return new Date(item.date) - new Date() > 0;
+            });
+            var pastArr3 = rData.filter((item) => {
+                return new Date(item.date) - new Date() < 0;
+            });
+            setPast(pastArr3);
+            setUpcoming(upArr3);
+        }
     }
-    // arrange("City", "State");
+
 
     const linkStyle = {
         textDecoration: "none",
@@ -146,32 +129,33 @@ function Function(props) {
         }
     }
     const handleNearest = () => {
-        console.log("Nearest Ride is CLicked");
+        // console.log("Nearest Ride is CLicked");
     }
     const handleUpcoming = () => {
-        console.log("Upcoming Ride is Clicked");
+        // console.log("Upcoming Ride is Clicked");
     }
     const handlePast = () => {
-        console.log("Past ride is clicked");
+        // console.log("Past ride is clicked");
     }
     const handleState = (e) => {
-        console.log("Selected state is " + e.target.value)
+        // console.log("Selected state is " + e.target.value)
         setSelectedState(e.target.value);
         // setNearest([]);
         // setPast([]);
         // setUpcoming([]);
-        arrange(selectedCity, selectedState);
-        handleFilter();
+        fil();
+        // arrange(selectedCity, selectedState);
+        // handleFilter();
     }
     const handleCity = (e) => {
         console.log("Selected city is " + e.target.value)
-        setSelectedCity(e.target.value);
+        // setSelectedCity(e.target.value);
         // setNearest([]);
         // setPast([]);
         // setUpcoming([]);
-
-        arrange(selectedCity, selectedState);
-        handleFilter();
+        fil();
+        // arrange(selectedCity, selectedState);
+        // handleFilter();
     }
     return (
         <>
@@ -185,12 +169,12 @@ function Function(props) {
                         </Link>
                         <Link to='/upcoming-rides' className="filter-link" style={handleLinkStyle('/up')}>
                             <div className="filters-item" onClick={handleUpcoming}>
-                                Upcoming rides ({upcoming.length})
+                                Upcoming rides
                             </div>
                         </Link>
                         <Link to='/past-rides' className="filter-link" style={handleLinkStyle('/past-rides')}>
                             <div className="filters-item" onClick={handlePast}>
-                                Past rides({past.length})
+                                Past rides
                             </div>
                         </Link>
                     </div>
@@ -232,13 +216,13 @@ function Function(props) {
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        <BodyNearest key="/nearest" closest={closest} stCode={stCode} nearestArray={rData.slice(0, 10)} />
+                        <BodyNearest key="/nearest" closest={closest} stCode={stCode} nearestArray={rData} />
                     </Route>
-                    <Route exact path="/upcoming-rides">
-                        <BodyUpcoming key="/upcoming" closest={closest} stCode={stCode} upComingArray={rData.slice(11, 19)} />
+                    <Route path="/upcoming-rides">
+                        <BodyUpcoming key="/upcoming" closest={closest} stCode={stCode} upComingArray={rData.slice(16, 25)} />
                     </Route>
-                    <Route exact path="/past-rides">
-                        <BodyPast key="/past" closest={closest} stCode={stCode} pastRidesArray={rData.slice(34, 37)} />
+                    <Route path="/past-rides">
+                        <BodyPast key="/past" closest={closest} stCode={stCode} pastRidesArray={rData.slice(1, 40)} />
                     </Route>
                 </Switch>
             </Router>
